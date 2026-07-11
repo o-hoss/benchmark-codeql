@@ -6,8 +6,6 @@ jobs:
   analyze:
     runs-on: ubuntu-latest
     permissions:
-      security-events: write
-      actions: read
       contents: read
     steps:
     - uses: actions/checkout@v4
@@ -18,5 +16,13 @@ jobs:
     - uses: github/codeql-action/init@v3
       with:
         languages: java
+        db-location: /tmp/codeql-db
     - run: mvn compile -Dspotless.skip=true
     - uses: github/codeql-action/analyze@v3
+      with:
+        output: /tmp/codeql-results
+        upload: never
+    - uses: actions/upload-artifact@v4
+      with:
+        name: codeql-sarif
+        path: /tmp/codeql-results
