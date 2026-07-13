@@ -22,7 +22,7 @@ jobs:
       with:
         output: /tmp/codeql-results
         upload: never
-    - uses: actions/upload-artifact@v4
+    - uses: actions/upload-artifact@v7
       with:
         name: codeql-sarif
         path: /tmp/codeql-results
